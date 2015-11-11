@@ -1,6 +1,6 @@
 # SacspGateway
 
-Gem EXPERIMENTAL para criação de chamados no SAC da Prefeitrua de São Paulo.
+Gem EXPERIMENTAL para criação de chamados no SAC da Prefeitura de São Paulo.
 Criei esta gem somente para fins de estudos e ela não deve ser utilizada para aplicações em produção.
 
 ## Installation
