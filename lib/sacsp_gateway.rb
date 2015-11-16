@@ -5,10 +5,8 @@ require "sacsp_gateway/client"
 module SacspGateway
   extend SingleForwardable
 
-  def_delegators :client, :get_subjects, :send_ticket_subject,
-    :send_ticket_subject_specification, :send_ticket_request_data,
-    :send_ticket_request_data_confirmation, :send_citizen_id_info,
-    :send_citizen_data_confirmation!
+  def_delegators :client, :get_subjects, :step_1, :step_2, :step_3,
+    :step_3_1, :step_4, :step_5!
 
   def self.client
     @client ||= Client.new

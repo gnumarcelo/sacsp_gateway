@@ -16,8 +16,8 @@ module SacspGateway
       end
     end
 
-    def send_ticket_subject subject_key
-      #Solicitacao 1 - Seleciona Assunto
+    def step_1 subject_key
+      #send_ticket_subject - Select the ticket subject
       resp_doc = conn.post('/default.asp', {
         txtAssu: '',
         comboAssunto: subject_key,
@@ -29,8 +29,8 @@ module SacspGateway
       end
     end
 
-    def send_ticket_subject_specification specification_key
-      #Solicitacao 2  - Seleciona Sub Assunto
+    def step_2 specification_key
+      #send_ticket_subject_specification - Select the subject specification
       resp_doc = conn.post('/solicitacaoCadastro.asp', {
         comboSubAssunto: specification_key,
         acao: 'Continuar'
@@ -39,8 +39,8 @@ module SacspGateway
       return true #TODO: deve mesmo retornar algo? true?
     end
 
-    def send_ticket_request_data ticket_data
-      #Solicitacao 3
+    def step_3 ticket_data
+      #send_ticket_request_data
       resp_doc = conn.post('/CadastroParametro/Logradouro.asp', ticket_data)
       validate_field_presence(resp_doc, "comboLogradouro")
       logradouros = resp_doc.xpath('//*[@name="comboLogradouro"]').map do |opt|
@@ -48,21 +48,23 @@ module SacspGateway
       end
     end
 
-    def send_ticket_request_data_confirmation ticket_data
-      #Solicitacao 3.1
+    def step_3_1 ticket_data
+      #send_ticket_request_data_confirmation
       resp_doc = conn.post('/CadastroParametro/Logradouro.asp', ticket_data)
       validate_field_presence(resp_doc, "txtRG")
       return true #TODO: deve mesmo retornar algo? true?
     end
 
-    def send_citizen_id_info id_info
+    def step_4 id_info
+      #send_citizen_id_info
       resp_doc = conn.post('/CadastroParametro/Logradouro.asp', id_info)
       citizen_id = id_info[:txtRG]
       validate_content_value_presence(resp_doc, "td", citizen_id)
       return true #TODO: deve mesmo retornar algo? true?
     end
 
-    def send_citizen_data_confirmation! citizen_data
+    def step_5! citizen_data
+      #send_citizen_data_confirmation
       resp_doc = conn.post('/CadastroParametro/Solicitante.asp?Acao=ENVIAR', citizen_data)
       ticket_number = resp_doc.xpath('//*[@id="conteudo2"]/table/tr/td/font/b').text
       fail SacspGatewayException.new("Response is not the expected") if !ticket_number

@@ -14,7 +14,7 @@ describe SacspGateway do
   it 'executes the step 1 - send the selected subject' do
     VCR.use_cassette("step1") do
       subject_key = "001Buraco"
-      response = SacspGateway.send_ticket_subject(subject_key)
+      response = SacspGateway.step_1(subject_key)
       expect(response).not_to be_empty
     end
   end
@@ -22,7 +22,7 @@ describe SacspGateway do
   it 'executes the step 2 - send the selected a specification' do
     VCR.use_cassette("step2") do
       specification_key = "200101STapa-buraco"
-      response = SacspGateway.send_ticket_subject_specification(specification_key)
+      response = SacspGateway.step_2(specification_key)
       expect(response).not_to be_nil
     end
   end
@@ -36,7 +36,7 @@ describe SacspGateway do
         txtDescricao: 'A via possui um buraco bem na esquina com a av nazare. Obs.: Este chamado substitui o anterior (13412632)',
         acao: 'Continuar'
       }
-      response = SacspGateway.send_ticket_request_data(ticket_data)
+      response = SacspGateway.step_3(ticket_data)
       expect(response).not_to be_empty
     end
   end
@@ -51,7 +51,7 @@ describe SacspGateway do
         txtDescricao: 'A via possui um buraco bem na esquina com a av nazare. Obs.: Este chamado substitui o anterior (13412632)',
         acao: 'Continuar'
       }
-      response = SacspGateway.send_ticket_request_data_confirmation(ticket_data)
+      response = SacspGateway.step_3_1(ticket_data)
       expect(response).not_to be_nil
     end
   end
@@ -64,7 +64,7 @@ describe SacspGateway do
         comboRGUF: 'SP',
         acao: 'Continuar'
       }
-      response = SacspGateway.send_citizen_id_info(id_info)
+      response = SacspGateway.step_4(id_info)
       expect(response).not_to be_nil
     end
   end
@@ -88,7 +88,7 @@ describe SacspGateway do
         txtEmail: 'meuemail@gmail.com',
         comboOcupacao: '002'
       }
-      ticket_number = SacspGateway.send_citizen_data_confirmation!(citizen_data)
+      ticket_number = SacspGateway.step_5!(citizen_data)
       puts "\n\n\nTicket Number: #{ticket_number}\n\n\n"
       expect(ticket_number).not_to be_nil
     end
