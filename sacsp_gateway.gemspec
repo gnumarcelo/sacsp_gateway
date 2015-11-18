@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Marcelo Menezes"]
   spec.email         = ["gnumarcelo@gmail.com"]
 
-  spec.summary       = %q{Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{Write a longer description or delete this line.}
+  spec.summary       = %q{Criação de chamados no SAC da Prefeitura de São Paulo.}
+  spec.description   = %q{Gem EXPERIMENTAL para criação de chamados no SAC da Prefeitura de São Paulo.}
   spec.homepage      = "https://github.com/gnumarcelo/sacsp_gateway"
   spec.license       = "MIT"
 
