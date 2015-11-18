@@ -41,15 +41,17 @@ module SacspGateway
 
     def step_3 ticket_data
       #send_ticket_request_data
+      ticket_data.merge(acao: 'Continuar')
       resp_doc = conn.post('/CadastroParametro/Logradouro.asp', ticket_data)
       validate_field_presence(resp_doc, "comboLogradouro")
-      logradouros = resp_doc.xpath('//*[@name="comboLogradouro"]').map do |opt|
+      streets = resp_doc.xpath('//*[@name="comboLogradouro"]').map do |opt|
         {key: opt.attr(:value), text: opt.attr(:value).split(" ", 2).last }
       end
     end
 
     def step_3_1 ticket_data
       #send_ticket_request_data_confirmation
+      ticket_data.merge(acao: 'Continuar')
       resp_doc = conn.post('/CadastroParametro/Logradouro.asp', ticket_data)
       validate_field_presence(resp_doc, "txtRG")
       return true #TODO: deve mesmo retornar algo? true?
@@ -57,6 +59,7 @@ module SacspGateway
 
     def step_4 id_info
       #send_citizen_id_info
+      id_info.merge(acao: 'Continuar')
       resp_doc = conn.post('/CadastroParametro/Logradouro.asp', id_info)
       citizen_id = id_info[:txtRG]
       validate_content_value_presence(resp_doc, "td", citizen_id)

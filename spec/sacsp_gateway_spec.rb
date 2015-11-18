@@ -33,8 +33,7 @@ describe SacspGateway do
         txtLogradouro: 'pouso alegre',
         txtNumero: 01,
         txtReferencia: 'na esquina c av nazare',
-        txtDescricao: 'A via possui um buraco bem na esquina com a av nazare. Obs.: Este chamado substitui o anterior (13412632)',
-        acao: 'Continuar'
+        txtDescricao: 'A via possui um buraco bem na esquina com a av nazare. Obs.: Este chamado substitui o anterior (13412632)'
       }
       response = SacspGateway.step_3(ticket_data)
       expect(response).not_to be_empty
@@ -48,8 +47,7 @@ describe SacspGateway do
         comboLogradouro: logradouro_selected,
         txtNumero: 01,
         txtReferencia: 'na esquina c av nazare',
-        txtDescricao: 'A via possui um buraco bem na esquina com a av nazare. Obs.: Este chamado substitui o anterior (13412632)',
-        acao: 'Continuar'
+        txtDescricao: 'A via possui um buraco bem na esquina com a av nazare. Obs.: Este chamado substitui o anterior (13412632)'
       }
       response = SacspGateway.step_3_1(ticket_data)
       expect(response).not_to be_nil
@@ -61,8 +59,7 @@ describe SacspGateway do
     VCR.use_cassette("step4") do
       id_info = {
         txtRG: 112223334,
-        comboRGUF: 'SP',
-        acao: 'Continuar'
+        comboRGUF: 'SP'
       }
       response = SacspGateway.step_4(id_info)
       expect(response).not_to be_nil
